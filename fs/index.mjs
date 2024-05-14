@@ -135,6 +135,22 @@ try {
 // rmSync还支持删除目录，递归删除子文件/目录等。
 // fs.rmSync('test-dir', { recursive: true })
 
+/** 
+ * 1.7 读取大文件
+ * fs.createReadStream
+ */
+// const readStream = fs.createReadStream('./index.txt',{
+//   encoding:"utf8"
+// })
+
+// readStream.on('data',(chunk)=>{
+//   console.log(chunk)
+// })
+
+// readStream.on('end',()=>{
+//   console.log('close')
+// })
+
 /**
  * 2.1读取目录所有文件
  * 通过 fs.readdirSync 获取目录下的文件信息
@@ -164,4 +180,22 @@ fs.rmdirSync('test-dir/a', { recursive: true })
 // fs.watch('./', { recursive: true }, (eventType, filename) => {
 //   console.log(`File '${filename}' has changed: ${eventType}`)
 // })
+
+/**
+ * fs.linkSync('./index.txt', './index2.txt') //硬链接
+ * fs.symlinkSync('./index.txt', './index3.txt' ,"file") //软连接
+ */
+
+//硬链接的作用和用途如下：
+
+// 1.文件共享：硬链接允许多个文件名指向同一个文件，这样可以在不同的位置使用不同的文件名引用相同的内容。这样的共享文件可以节省存储空间，并且在多个位置对文件的修改会反映在所有引用文件上。
+// 2.文件备份：通过创建硬链接，可以在不复制文件的情况下创建文件的备份。如果原始文件发生更改，备份文件也会自动更新。这样可以节省磁盘空间，并确保备份文件与原始文件保持同步。
+// 3.文件重命名：通过创建硬链接，可以为文件创建一个新的文件名，而无需复制或移动文件。这对于需要更改文件名但保持相同内容和属性的场景非常有用。
+
+// 软链接的一些特点和用途如下：
+
+// 1.软链接可以创建指向文件或目录的引用。这使得你可以在不复制或移动文件的情况下引用它们，并在不同位置使用不同的文件名访问相同的内容。
+// 2.软链接可以用于创建快捷方式或别名，使得你可以通过一个简短或易记的路径来访问复杂或深层次的目录结构。
+// 3.软链接可以用于解决文件或目录的位置变化问题。如果目标文件或目录被移动或重命名，只需更新软链接的目标路径即可，而不需要修改引用该文件或目录的其他代码。
+
 
