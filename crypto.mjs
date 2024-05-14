@@ -48,9 +48,28 @@ let decrypted = decipher.update(encrypted, 'hex', 'utf8')
 decrypted += decipher.final('utf8')
 
 console.log('Decrypted data:', decrypted)
+/**
+ * 1.3 crypto.generateKeyPairSync 非对称加密
+ */
+const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
+    modulusLength: 2048,
+})
+
+// 要加密的数据
+const text = 'data';
+
+// 使用公钥进行加密
+const encryptedPair = crypto.publicEncrypt(publicKey, Buffer.from(text, 'utf-8'));
+
+// 使用私钥进行解密
+const decryptedPair = crypto.privateDecrypt(privateKey, encryptedPair);
+
+console.log(decryptedPair.toString());
+
+
 
 /**
- * 1.3 crypto.randomBytes(size[, callback])：生成具有给定大小的随机数据 (Buffer 类型)。
+ * 1.4 crypto.randomBytes(size[, callback])：生成具有给定大小的随机数据 (Buffer 类型)。
  */
 
 console.log(crypto.randomBytes(32).toString('hex'))
